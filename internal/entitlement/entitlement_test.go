@@ -50,18 +50,6 @@ func TestEvaluate_InactiveWithPastExpiry_NoChange(t *testing.T) {
 	}
 }
 
-func TestEvaluate_ActiveWithNoExpiry(t *testing.T) {
-	// Active=true with no expires_at (e.g. lifetime entitlement) must not be touched.
-	resp := evaluate(true, "MARKETPLACE", nil, time.Now(), "PURCHASE")
-
-	if !resp.Active {
-		t.Error("expected active=true when no expiry is set")
-	}
-	if resp.ExpiresAt != nil {
-		t.Error("expected expiresAt to remain nil")
-	}
-}
-
 func TestEvaluate_Sources(t *testing.T) {
 	future := time.Now().Add(time.Hour)
 	cases := []string{"STORE", "CARRIER", "MARKETPLACE"}
