@@ -1,4 +1,4 @@
-.PHONY: up down test build tidy
+.PHONY: up down test e2e build tidy
 
 up:
 	docker-compose up -d --build
@@ -8,6 +8,9 @@ down:
 
 test: tidy
 	go test -v ./...
+
+e2e:
+	bash scripts/e2e_test.sh
 
 tidy:
 	go mod tidy
